@@ -37,12 +37,21 @@ def main():
         elif command == "hello":
             print("How can I help you?")
         elif command == "add":
+            if len(args) != 2:
+                print("Invalid command. Usage: add <name> <phone number>")
+                continue
             add_contact(args, contacts)
             print("Contact added.")
         elif command == "change":
+            if len(args) != 2:
+                print("Invalid command. Usage: change <name> <phone number>")
+                continue
             change_contact(args, contacts)
             print("Contact updated.")
         elif command == "phone":
+            if len(args) != 1:
+                print("Invalid command. Usage: phone <name>")
+                continue
             phone = phone_contact(args, contacts)
             print(phone)
         elif command == "all":
