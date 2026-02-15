@@ -4,19 +4,26 @@ def parse_input(user_input):
     return cmd, *args
 
 def add_contact(args, contacts):
+    if len(args) != 2:
+        print("Invalid command. Usage: add <name> <phone number>")
+        return
     name, phone = args
     contacts[name] = phone
-    return "Contact added."
+    print("Contact added.")
 
 def change_contact(args, contacts):
+    if len(args) != 2:
+        print("Invalid command. Usage: change <name> <phone number>")
     name, phone = args
     contacts[name] = phone
-    return f"Contact {name} changed to {phone}."
+    print("Contact updated.")
 
 def phone_contact(args, contacts):
+    if len(args) != 1:
+        print("Invalid command. Usage: phone <name>")
     name = args[0]
     phone = contacts.get(name)
-    return f"Phone number of {name} is {phone}." if phone else f"Contact {name} not found."
+    print(f"Phone number of {name} is {phone}." if phone else f"Contact {name} not found.")
 
 def all_contacts(contacts):
     for contact in contacts.items():
@@ -37,23 +44,11 @@ def main():
         elif command == "hello":
             print("How can I help you?")
         elif command == "add":
-            if len(args) != 2:
-                print("Invalid command. Usage: add <name> <phone number>")
-                continue
             add_contact(args, contacts)
-            print("Contact added.")
         elif command == "change":
-            if len(args) != 2:
-                print("Invalid command. Usage: change <name> <phone number>")
-                continue
             change_contact(args, contacts)
-            print("Contact updated.")
         elif command == "phone":
-            if len(args) != 1:
-                print("Invalid command. Usage: phone <name>")
-                continue
-            phone = phone_contact(args, contacts)
-            print(phone)
+            phone_contact(args, contacts)
         elif command == "all":
             all_contacts(contacts)
         else:
