@@ -5,30 +5,29 @@ def parse_input(user_input):
 
 def add_contact(args, contacts):
     if len(args) != 2:
-        print("Invalid command. Usage: add <name> <phone number>")
-        return
+        return "Invalid command. Usage: add <name> <phone number>"
     name, phone = args
     contacts[name] = phone
-    print("Contact added.")
+    return "Contact added."
 
 def change_contact(args, contacts):
     if len(args) != 2:
-        print("Invalid command. Usage: change <name> <phone number>")
+        return "Invalid command. Usage: change <name> <phone number>"
     name, phone = args
     contacts[name] = phone
-    print("Contact updated.")
+    return "Contact updated."
 
 def phone_contact(args, contacts):
     if len(args) != 1:
-        print("Invalid command. Usage: phone <name>")
+        return "Invalid command. Usage: phone <name>"
     name = args[0]
     phone = contacts.get(name)
-    print(f"Phone number of {name} is {phone}." if phone else f"Contact {name} not found.")
+    return f"Phone number of {name} is {phone}." if phone else f"Contact {name} not found."
 
 def all_contacts(contacts):
-    for contact in contacts.items():
-        name, phone = contact
-        print(f"{name}: {phone}")
+    if len(contacts) == 0:
+        return "No contacts in the list."
+    return "\n".join(f"{name}: {phone}" for name, phone in contacts.items())
 
 def main():
     contacts = {}
@@ -44,13 +43,13 @@ def main():
         elif command == "hello":
             print("How can I help you?")
         elif command == "add":
-            add_contact(args, contacts)
+            print(add_contact(args, contacts))
         elif command == "change":
-            change_contact(args, contacts)
+            print(change_contact(args, contacts))
         elif command == "phone":
-            phone_contact(args, contacts)
+            print(phone_contact(args, contacts))
         elif command == "all":
-            all_contacts(contacts)
+            print(all_contacts(contacts))
         else:
             print("Invalid command.")
 
